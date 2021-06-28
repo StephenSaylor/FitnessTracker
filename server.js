@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const app = express()
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3002
 
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }))
@@ -16,16 +16,18 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(routes)
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/fitnessDB',
-  {
+mongoose
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
     useFindAndModify: false,
-  },
-);
-//   .then(
-//     app.listen(PORT, () => {
-//       console.log(`App listening on port ${PORT}`)
-// }))
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
+  .then( () => {
+    app.listen(PORT, () => {
+      console.log(`App listening on port ${PORT}`)
+    }
+    )
+  }
+)
+
