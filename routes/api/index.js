@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const workoutRoutes = require('./api')
+const workoutRoutes = require('./workoutRoutes')
 
 router.use('/workouts', workoutRoutes)
 

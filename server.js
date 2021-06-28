@@ -12,17 +12,18 @@ const PORT = process.env.PORT || 3000
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(routes)
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`)
-})
+mongoose
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
+  .then(
+    app.listen(PORT, () => {
+      console.log(`App listening on port ${PORT}`)
+}))
