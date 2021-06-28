@@ -4,7 +4,7 @@ const homeRoutes = require('./homeRoutes')
 // const workoutRoutes = require('./workoutRoutes')
 
 router.use('/api', apiRoutes)
-router.use('/homeRoutes', homeRoutes)
+router.use('/', homeRoutes)
 
 // router.use('/workouts', workoutRoutes)
 
